@@ -15,9 +15,9 @@
 		1A624CA01AC690C50041BAD4 /* AddOilMachineMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A624C9F1AC690C50041BAD4 /* AddOilMachineMapTests.m */; };
 		1A624CAD1AC691880041BAD4 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A624CAC1AC691880041BAD4 /* MapViewController.m */; };
 		1A624CB51AC692520041BAD4 /* DataCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A624CB41AC692520041BAD4 /* DataCenter.m */; };
-		1A624CC31AC69F190041BAD4 /* AMAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A624CC21AC69F190041BAD4 /* AMAnnotation.m */; };
-		1A624CC41AC69F190041BAD4 /* AMAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A624CC21AC69F190041BAD4 /* AMAnnotation.m */; };
 		1A624CC71AC6DCC90041BAD4 /* FMDBDataAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A624CC61AC6DCC90041BAD4 /* FMDBDataAccess.m */; };
+		1ABFFB621AC70B7C00D8F52E /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABFFB611AC70B7C00D8F52E /* DetailViewController.m */; };
+		1ABFFB661AC71AD900D8F52E /* TransitionFromMapToDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ABFFB651AC71AD900D8F52E /* TransitionFromMapToDetails.m */; };
 		6AAD0AEB08A7B38BD9E7CB8A /* libPods-AddOilMachineMapTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D8BBD16A4FE62EFC40138AD /* libPods-AddOilMachineMapTests.a */; };
 		F0143B69D4C578E35ED32087 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B89BF9DB7BC56F4405789C /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -50,10 +50,12 @@
 		1A624CB31AC692520041BAD4 /* DataCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataCenter.h; sourceTree = "<group>"; };
 		1A624CB41AC692520041BAD4 /* DataCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataCenter.m; sourceTree = "<group>"; };
 		1A624CC01AC696B30041BAD4 /* AddOilMachineMap-PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "AddOilMachineMap-PrefixHeader.pch"; sourceTree = SOURCE_ROOT; };
-		1A624CC11AC69F190041BAD4 /* AMAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAnnotation.h; sourceTree = "<group>"; };
-		1A624CC21AC69F190041BAD4 /* AMAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAnnotation.m; sourceTree = "<group>"; };
 		1A624CC51AC6DCC90041BAD4 /* FMDBDataAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDBDataAccess.h; sourceTree = "<group>"; };
 		1A624CC61AC6DCC90041BAD4 /* FMDBDataAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDBDataAccess.m; sourceTree = "<group>"; };
+		1ABFFB601AC70B7C00D8F52E /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		1ABFFB611AC70B7C00D8F52E /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		1ABFFB641AC71AD900D8F52E /* TransitionFromMapToDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionFromMapToDetails.h; sourceTree = "<group>"; };
+		1ABFFB651AC71AD900D8F52E /* TransitionFromMapToDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionFromMapToDetails.m; sourceTree = "<group>"; };
 		375496969791B70829D2C09F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		55B89BF9DB7BC56F4405789C /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		69B5A935C5E6EF11010A154F /* Pods-AddOilMachineMapTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AddOilMachineMapTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AddOilMachineMapTests/Pods-AddOilMachineMapTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		1A624C821AC690C50041BAD4 /* AddOilMachineMap */ = {
 			isa = PBXGroup;
 			children = (
+				1ABFFB631AC71AB600D8F52E /* AnimationTransition */,
 				1A624CB21AC692520041BAD4 /* Models */,
 				1A624C871AC690C50041BAD4 /* AppDelegate.h */,
 				1A624C881AC690C50041BAD4 /* AppDelegate.m */,
@@ -113,6 +116,8 @@
 				1A624C831AC690C50041BAD4 /* Supporting Files */,
 				1A624CAB1AC691880041BAD4 /* MapViewController.h */,
 				1A624CAC1AC691880041BAD4 /* MapViewController.m */,
+				1ABFFB601AC70B7C00D8F52E /* DetailViewController.h */,
+				1ABFFB611AC70B7C00D8F52E /* DetailViewController.m */,
 			);
 			path = AddOilMachineMap;
 			sourceTree = "<group>";
@@ -149,12 +154,19 @@
 			children = (
 				1A624CB31AC692520041BAD4 /* DataCenter.h */,
 				1A624CB41AC692520041BAD4 /* DataCenter.m */,
-				1A624CC11AC69F190041BAD4 /* AMAnnotation.h */,
-				1A624CC21AC69F190041BAD4 /* AMAnnotation.m */,
 				1A624CC51AC6DCC90041BAD4 /* FMDBDataAccess.h */,
 				1A624CC61AC6DCC90041BAD4 /* FMDBDataAccess.m */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		1ABFFB631AC71AB600D8F52E /* AnimationTransition */ = {
+			isa = PBXGroup;
+			children = (
+				1ABFFB641AC71AD900D8F52E /* TransitionFromMapToDetails.h */,
+				1ABFFB651AC71AD900D8F52E /* TransitionFromMapToDetails.m */,
+			);
+			path = AnimationTransition;
 			sourceTree = "<group>";
 		};
 		AA3DFB25AFD161319066F14E /* Frameworks */ = {
@@ -348,8 +360,9 @@
 				1A624C891AC690C50041BAD4 /* AppDelegate.m in Sources */,
 				1A624CC71AC6DCC90041BAD4 /* FMDBDataAccess.m in Sources */,
 				1A624CB51AC692520041BAD4 /* DataCenter.m in Sources */,
+				1ABFFB661AC71AD900D8F52E /* TransitionFromMapToDetails.m in Sources */,
 				1A624C861AC690C50041BAD4 /* main.m in Sources */,
-				1A624CC31AC69F190041BAD4 /* AMAnnotation.m in Sources */,
+				1ABFFB621AC70B7C00D8F52E /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +370,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A624CC41AC69F190041BAD4 /* AMAnnotation.m in Sources */,
 				1A624CA01AC690C50041BAD4 /* AddOilMachineMapTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

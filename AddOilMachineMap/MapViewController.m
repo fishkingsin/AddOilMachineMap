@@ -7,7 +7,8 @@
 //
 
 #import "MapViewController.h"
-//#import "AMAnnotation.h"
+#import "DetailViewController.h"
+#import "TransitionFromMapToDetails.h"
 static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 @interface MapViewController ()
 @property(weak,nonatomic) DataCenter *dc;
@@ -30,20 +31,21 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
     __block NSMutableArray *anno = [[NSMutableArray alloc] init];
     for (NSDictionary *annoationDic in arr) {
 //        [queue addOperationWithBlock:^{
-//            NSString* id = [annoationDic valueForKey:kID];
+//            NSString* ID = [annoationDic valueForKey:kID];
             CGFloat lat = [[annoationDic valueForKey:kLatituede] floatValue];
             CGFloat lng = [[annoationDic valueForKey:kLongitude] floatValue];
-            NSString *location = [annoationDic valueForKey:kLongitude];
+//            NSString *location = [annoationDic valueForKey:kLongitude];
 //            NSString *message = [annoationDic valueForKey:kMessage];
-//            NSString *name =[annoationDic valueForKey:kName] ;
-            
+            NSString *name =[annoationDic valueForKey:kName] ;
+        
             CLLocationCoordinate2D coord;
             coord.latitude = lat;
             coord.longitude = lng;
 
             RMAnnotation *annotation = [[RMAnnotation alloc] initWithMapView:self.mapView
                                                                   coordinate:coord
-                                                                    andTitle:location];
+                                                                    andTitle:name];
+            [annotation setUserInfo:annoationDic];
             @synchronized(annotation) {
                 [anno addObject:annotation];
             }
@@ -89,6 +91,7 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.delegate = self;
     [[RMConfiguration sharedInstance] setAccessToken:@"pk.eyJ1IjoiZmlza2luZ3NpbiIsImEiOiJJOTIyM3BnIn0.gdobaG3Pzh-BomT1-8jPmw"];
     
     RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:@"fiskingsin.lj4gno8f"];
@@ -129,21 +132,20 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
         }
     });
 }
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.navigationController.delegate = self;
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+}
 - (void)dataCenter:(DataCenter*)dataCenter apiString:(NSString*) apiStr dataDidReady:(NSDictionary*)result request:(AFHTTPRequestOperation*)request
 {
 //    DDLogDebug(@"%s %@",__PRETTY_FUNCTION__,result);
@@ -166,16 +168,6 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 #pragma mark - MKMapViewDelegate
 - (RMMapLayer *)mapView:(RMMapView *)mapView layerForAnnotation:(RMAnnotation *)annotation
 {
-//    if (annotation.isUserLocationAnnotation)
-//        return nil;
-//    
-//    // add Maki icon and color the marker
-//    RMMarker *marker;
-//    
-//    marker = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"marker"]];
-//    marker.canShowCallout = YES;
-//    
-//    return marker;
     if (annotation.isUserLocationAnnotation)
         return nil;
     
@@ -199,142 +191,53 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
             layer.bounds = CGRectMake(0, 0, 120, 120);
         }
         
-        [(RMMarker *)layer setTextForegroundColor:[UIColor whiteColor]];
+        [(RMMarker *)layer setTextForegroundColor:[UIColor yellowColor]];
         
         [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%lu",
                                                  (unsigned long)[annotation.clusteredAnnotations count]]
          position:CGPointMake(0, layer.bounds.size.height)];
+    }
+    else{
+        layer = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"marker"]];
+        layer.opacity = 0.75;
+        
+        // set the size of the circle
+        layer.bounds = CGRectMake(0, 0, 30, 30);
+        [(RMMarker *)layer setTextForegroundColor:[UIColor yellowColor]];
+        [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%@",annotation.title]
+                                       position:CGPointMake(0, layer.bounds.size.height)];
+
     }
     
     
     return layer;
 }
 
-- (void)mapView:(RMMapView *)mapView willHideLayerForAnnotation:(RMAnnotation *)annotation
-{
-    
-}
-
-- (void)mapView:(RMMapView *)mapView didHideLayerForAnnotation:(RMAnnotation *)annotation
-{
-    
-}
-
-- (void)mapView:(RMMapView *)mapView didSelectAnnotation:(RMAnnotation *)annotation
-{
-    
-}
-
-- (void)mapView:(RMMapView *)mapView didDeselectAnnotation:(RMAnnotation *)annotation
-{
-    
-}
-
-- (void)beforeMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction
-{
-    
-}
-
-- (void)afterMapMove:(RMMapView *)map byUser:(BOOL)wasUserAction
-{
-    
-}
-
-- (void)beforeMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction
-{
-    
-}
-
-- (void)afterMapZoom:(RMMapView *)map byUser:(BOOL)wasUserAction
-{
-    
-}
-
-- (void)mapViewRegionDidChange:(RMMapView *)mapView
-{
-    
-}
-
-- (void)doubleTapOnMap:(RMMapView *)map at:(CGPoint)point
-{
-    
-}
-
-- (void)singleTapOnMap:(RMMapView *)map at:(CGPoint)point
-{
-    
-}
-
-- (void)singleTapTwoFingersOnMap:(RMMapView *)map at:(CGPoint)point
-{
-    
-}
-
-- (void)longPressOnMap:(RMMapView *)map at:(CGPoint)point
-{
-    
-}
 
 - (void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
+    DetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+    if([annotation.clusteredAnnotations count]>0)
+    {
+        [vc setAnnotations:annotation.clusteredAnnotations];
+    }
+    else{
+        [vc setAnnotations:@[annotation]];
+    }
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
-
-- (void)doubleTapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
-{
-    
-}
-
-- (void)longPressOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
-{
-    
-}
-
 - (void)tapOnLabelForAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
-    
-}
-
-- (void)doubleTapOnLabelForAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
-{
-    
-}
-
-- (void)tapOnCalloutAccessoryControl:(UIControl *)control forAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
-{
-    
-}
-
-- (BOOL)mapView:(RMMapView *)mapView shouldDragAnnotation:(RMAnnotation *)annotation
-{
-    return NO;
-}
-
-- (void)mapView:(RMMapView *)mapView annotation:(RMAnnotation *)annotation didChangeDragState:(RMMapLayerDragState)newState fromOldState:(RMMapLayerDragState)oldState
-{
-    
-}
-- (void)mapViewWillStartLocatingUser:(RMMapView *)mapView
-{
-    
-}
-- (void)mapViewDidStopLocatingUser:(RMMapView *)mapView
-{
-    
-}
-
-- (void)mapView:(RMMapView *)mapView didUpdateUserLocation:(RMUserLocation *)userLocation
-{
-    
-}
-
-- (void)mapView:(RMMapView *)mapView didFailToLocateUserWithError:(NSError *)error
-{
-    
-}
-- (void)mapView:(RMMapView *)mapView didChangeUserTrackingMode:(RMUserTrackingMode)mode animated:(BOOL)animated
-{
-    
+    DetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
+    if([annotation.clusteredAnnotations count]>0)
+    {
+        [vc setAnnotations:annotation.clusteredAnnotations];
+    }
+    else{
+        [vc setAnnotations:@[annotation]];
+    }
+    [self.navigationController pushViewController:vc animated:YES];
 }
 //- (void)updateVisibleAnnotations {
 //
@@ -536,5 +439,21 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 //    
 //    return sortedAnnotations[0];
 //}
+#pragma mark UINavigationControllerDelegate methods
 
+
+- (id<UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                  animationControllerForOperation:(UINavigationControllerOperation)operation
+                                               fromViewController:(UIViewController *)fromVC
+                                                 toViewController:(UIViewController *)toVC {
+    // Check if we're transitioning from this view controller to a DSLSecondViewController
+    if (fromVC == self && [toVC isKindOfClass:[DetailViewController class]]) {
+        TransitionFromMapToDetails* transistion = [[TransitionFromMapToDetails alloc] init];
+        ((DetailViewController*)toVC).transition = transistion;
+        return transistion;
+    }
+    else {
+        return nil;
+    }
+}
 @end

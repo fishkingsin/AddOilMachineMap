@@ -23,6 +23,43 @@
             </objects>
             <point key="canvasLocation" x="-200" y="681"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="i5X-iF-tSS">
+            <objects>
+                <viewController storyboardIdentifier="detailViewController" id="AgJ-jN-85k" customClass="DetailViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="sz3-bS-MiD"/>
+                        <viewControllerLayoutGuide type="bottom" id="6eD-Aa-8p9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WJQ-uC-sAg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puJ-Sa-qaj" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="AgJ-jN-85k" id="uVN-YB-4LI"/>
+                                    <outlet property="delegate" destination="AgJ-jN-85k" id="fZ7-7Y-Bfw"/>
+                                </connections>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="puJ-Sa-qaj" secondAttribute="centerX" id="3xO-kh-iNE"/>
+                            <constraint firstItem="puJ-Sa-qaj" firstAttribute="width" secondItem="WJQ-uC-sAg" secondAttribute="width" id="iYZ-g3-KZW"/>
+                            <constraint firstItem="puJ-Sa-qaj" firstAttribute="height" secondItem="WJQ-uC-sAg" secondAttribute="height" id="oCT-iS-MaF"/>
+                            <constraint firstAttribute="centerY" secondItem="puJ-Sa-qaj" secondAttribute="centerY" id="pMj-1k-OZE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="carousel" destination="puJ-Sa-qaj" id="gG7-KS-wN5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ybc-cS-PDz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="441" y="681"/>
+        </scene>
         <!--Map-->
         <scene sceneID="ELz-XW-cjj">
             <objects>

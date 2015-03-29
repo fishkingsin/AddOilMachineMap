@@ -35,4 +35,6 @@ static NSString * const kGMpaURL       = @"/projects/basara/js/gmap.json";
 #import "Mapbox.h"
 #import "FMDB.h"
 #import "FMDBDataAccess.h"
+#import "iCarousel.h"
+#import "FXBlurView.h"
 #endif

@@ -22,13 +22,15 @@
     NSTimeInterval duration = [self transitionDuration:transitionContext];
     if(!self.reversed)
     {
-        
-        UIImage *originalImage = [self imageWithView:fromView];
-        UIImageView *blurImageView = [[UIImageView alloc] initWithFrame:fromView.bounds];
-        
-        [blurImageView setImage:[originalImage blurredImageWithRadius:10.0f iterations:3 tintColor:[UIColor blackColor]]];
-        self.bluredImageView = blurImageView;
-        
+        RMMapView *mapview =nil;
+        [self findMapView:fromView ref:&mapview];
+        if(mapview){
+            UIImage *originalImage = [mapview takeSnapshotAndIncludeOverlay:YES];
+            UIImageView *blurImageView = [[UIImageView alloc] initWithFrame:fromView.bounds];
+            
+            [blurImageView setImage:[originalImage blurredImageWithRadius:10.0f iterations:3 tintColor:[UIColor blackColor]]];
+            self.bluredImageView = blurImageView;
+        }
         [containerView addSubview:self.bluredImageView];
         [containerView addSubview:toView];
         self.bluredImageView.alpha = 0.0;
@@ -80,5 +82,25 @@
     UIImage * snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return snapshotImage;
+}
+-(void)findMapView:(UIView*)fromView ref:(UIView**)ref
+{
+    NSArray * arr = [fromView subviews];
+    
+    for(UIView *view in arr)
+    {
+        if(view.tag == TARGET_MAP_TAG)
+        {
+            *ref = view;
+        }
+        else
+        {
+            if([view.subviews count]>0)
+            {
+                [self findMapView:view ref:ref];
+            }
+        }
+    }
+    
 }
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define TARGET_MAP_TAG 0xAA
 @interface TransitionFromMapToDetails : NSObject<UIViewControllerAnimatedTransitioning>
 
 

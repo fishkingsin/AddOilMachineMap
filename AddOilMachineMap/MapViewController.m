@@ -102,6 +102,7 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
     // set zoom
     self.mapView.zoom = 1;
     self.mapView.clusteringEnabled = YES;
+    self.mapView.tag = TARGET_MAP_TAG;
     
     // set coordinates
     // center the map to the coordinates
@@ -216,19 +217,16 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 
 - (void)tapOnAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
-    DetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
-    if([annotation.clusteredAnnotations count]>0)
-    {
-        [vc setAnnotations:annotation.clusteredAnnotations];
-    }
-    else{
-        [vc setAnnotations:@[annotation]];
-    }
-    [self.navigationController pushViewController:vc animated:YES];
+    [self onTap:annotation];
     
 }
 - (void)tapOnLabelForAnnotation:(RMAnnotation *)annotation onMap:(RMMapView *)map
 {
+    [self onTap:annotation];
+}
+-(void)onTap:(RMAnnotation *)annotation
+{
+    
     DetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"detailViewController"];
     if([annotation.clusteredAnnotations count]>0)
     {

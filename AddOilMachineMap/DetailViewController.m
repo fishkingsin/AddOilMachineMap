@@ -17,6 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view setBackgroundColor:[UIColor colorWithWhite:0 alpha:.05]];
     self.navigationController.delegate = self;
     // Do any additional setup after loading the view.    self.carousel.tag = 0xCC;
     self.carousel.type = iCarouselTypeLinear;

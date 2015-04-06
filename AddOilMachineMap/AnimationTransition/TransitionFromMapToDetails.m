@@ -25,7 +25,7 @@
         RMMapView *mapview =nil;
         [self findMapView:fromView ref:&mapview];
         if(mapview){
-            UIImage *originalImage = [mapview takeSnapshotAndIncludeOverlay:YES];
+            UIImage *originalImage = [mapview takeSnapshotAndIncludeOverlay:YES];//[self imageWithView:fromView];//
             UIImageView *blurImageView = [[UIImageView alloc] initWithFrame:fromView.bounds];
             
             [blurImageView setImage:[originalImage blurredImageWithRadius:10.0f iterations:3 tintColor:[UIColor blackColor]]];

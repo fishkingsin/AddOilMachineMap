@@ -25,7 +25,7 @@
     DDLogDebug(@"%s",__PRETTY_FUNCTION__);
     
        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
 //    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
 //    [[UINavigationBar appearance] setTranslucent:YES];
 //        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavBG"] forBarMetrics:UIBarMetricsDefault];

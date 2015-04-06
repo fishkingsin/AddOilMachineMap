@@ -92,6 +92,8 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.delegate = self;
+    UINavigationBar* navigationBar = self.navigationController.navigationBar;
+    [navigationBar setBarTintColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5]];
     [[RMConfiguration sharedInstance] setAccessToken:@"pk.eyJ1IjoiZmlza2luZ3NpbiIsImEiOiJJOTIyM3BnIn0.gdobaG3Pzh-BomT1-8jPmw"];
     
     RMMapboxSource *tileSource = [[RMMapboxSource alloc] initWithMapID:@"fiskingsin.lj4gno8f"];

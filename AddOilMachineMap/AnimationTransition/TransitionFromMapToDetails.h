@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) id<UIViewControllerContextTransitioning> context;
 
-@property (nonatomic, weak) UIImageView *bluredImageView;
+@property (nonatomic, strong) UIImageView *bluredImageView;
 @property (nonatomic, strong) UIView *backgroundView;
 @property (assign, nonatomic) BOOL reversed;
 

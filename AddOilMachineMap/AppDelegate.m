@@ -20,18 +20,18 @@
     // Override point for customization after application launch.
     [DDLog addLogger:[DDASLLogger sharedInstance] withLevel:ddLogLevel];
     [DDLog addLogger:[DDTTYLogger sharedInstance] withLevel:ddLogLevel];
-   
+    
     DDLogDebug(@"================App Start================");
     DDLogDebug(@"%s",__PRETTY_FUNCTION__);
     
-       [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor blackColor]];
-//    [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
-//    [[UINavigationBar appearance] setTranslucent:YES];
-//        [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"NavBG"] forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setTitleTextAttributes:@{
-//                                                           NSForegroundColorAttributeName: [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]}];
-   
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    [[UIBarButtonItem appearance] setTintColor:[UIColor yellowColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.5]];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           NSForegroundColorAttributeName: [UIColor yellowColor]}];
+    [[UINavigationBar appearance] setTintColor:[UIColor yellowColor]];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
 }
 
@@ -51,8 +51,8 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-
-
+    
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

@@ -70,7 +70,8 @@
         view = [[UIView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, width, width*0.5)];
         
         [view setBackgroundColor:[UIColor clearColor]];
-        
+        view.layer.borderColor = [UIColor yellowColor].CGColor;
+        view.layer.borderWidth = 3.0f;
         
         
         textField = [[UITextView alloc] initWithFrame:CGRectMake(0.0f, 0, width, width*0.5)];
@@ -80,7 +81,7 @@
         textField.font = [textField.font fontWithSize:22];
         textField.tag = 1;
         [textField setTextColor:[UIColor whiteColor]];
-//        [textField setBackgroundColor:[UIColor blackColor]];
+
         textField.center = view.center;
         [view addSubview:textField];
         [textField setSelectable:NO];

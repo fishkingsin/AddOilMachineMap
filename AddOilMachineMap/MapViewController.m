@@ -9,6 +9,10 @@
 #import "MapViewController.h"
 #import "DetailViewController.h"
 #import "TransitionFromMapToDetails.h"
+#if DEBUG
+#import "FLEXManager.h"
+#endif
+
 static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 @interface MapViewController ()
 @property(weak,nonatomic) DataCenter *dc;
@@ -134,6 +138,10 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
             [self.dc  apiRequest:kGMpaURL :nil];
         }
     });
+    
+    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSixFingerQuadrupleTap:)];
+    [tapGesture setNumberOfTouchesRequired:5];
+    [self.view addGestureRecognizer:tapGesture];
 }
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -180,6 +188,7 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
     {
         layer = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"marker"]];
         
+
         layer.opacity = 0.75;
         
         // set the size of the circle
@@ -187,18 +196,21 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
         
         // change the size of the circle depending on the cluster's size
         if ([annotation.clusteredAnnotations count] < 100) {
-            layer.bounds = CGRectMake(0, 0, 50, 50);
+
+            layer.bounds = CGRectMake(0,0, 50, 50);
         } else if ([annotation.clusteredAnnotations count] < 500) {
-            layer.bounds = CGRectMake(0, 0, 100, 100);
+
+            layer.bounds = CGRectMake(0,0, 100, 100);
         } else if ([annotation.clusteredAnnotations count] > 500) {
-            layer.bounds = CGRectMake(0, 0, 120, 120);
+
+            layer.bounds = CGRectMake(0,0, 200, 200);
         }
         
         [(RMMarker *)layer setTextForegroundColor:[UIColor yellowColor]];
         
         [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%lu",
                                                  (unsigned long)[annotation.clusteredAnnotations count]]
-         position:CGPointMake(0, layer.bounds.size.height)];
+         position:CGPointMake(layer.bounds.size.width*0.5,layer.bounds.size.height*0.5)];
     }
     else{
         layer = [[RMMarker alloc] initWithUIImage:[UIImage imageNamed:@"marker"]];
@@ -208,7 +220,7 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
         layer.bounds = CGRectMake(0, 0, 30, 30);
         [(RMMarker *)layer setTextForegroundColor:[UIColor yellowColor]];
         [(RMMarker *)layer changeLabelUsingText:[NSString stringWithFormat:@"%@",annotation.title]
-                                       position:CGPointMake(0, layer.bounds.size.height)];
+                                       position:CGPointMake(layer.bounds.size.width*0.5,layer.bounds.size.height*0.5)];
 
     }
     
@@ -459,4 +471,21 @@ static const CLLocationCoordinate2D OriginalLocation = {22.2796095,114.1661851};
 -(UIStatusBarStyle)preferredStatusBarStyle{
     return UIStatusBarStyleLightContent;
 }
+
+
+- (IBAction)showFlex:(id)sender {
+
+    [[FLEXManager sharedManager] showExplorer];
+}
+
+- (void)handleSixFingerQuadrupleTap:(UITapGestureRecognizer *)tapRecognizer
+{
+#if DEBUG
+    if (tapRecognizer.state == UIGestureRecognizerStateRecognized) {
+        // This could also live in a handler for a keyboard shortcut, debug menu item, etc.
+        [[FLEXManager sharedManager] showExplorer];
+    }
+#endif
+}
+
 @end

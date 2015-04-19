@@ -16,9 +16,9 @@
 #import "DDTTYLogger.h"
 
 #if DEBUG
-static const int ddLogLevel = DDLogLevelDebug;
+static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 #else
-static const int ddLogLevel = DDLogLevelInfo;
+static const DDLogLevel ddLogLevel = DDLogLevelInfo;
 #endif
 
 #import"AFNetworking.h"
